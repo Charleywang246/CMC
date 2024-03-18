@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
     <body>
-        <button type="button" onclick="getLocation()">getLocation</button>
-        <button type="button" onclick="clearData()">clear</button>
         <p id="demo"></p>
+        <p id="output"></p>
         <script>
+            const targetX = 120.6362484
+            const targetY = 24.1068502
+            // const targetX = 120.6370795
+            // const targetY = 24.1046469
+
             const x = document.getElementById("demo")
-            function getLocation() {
+            const y = document.getElementById("output")
+
+            setInterval(() => {
                 if(navigator.geolocation) {
-                    navigator.geolocation.watchPosition(
+                    navigator.geolocation.getCurrentPosition(
                         (position) => {x.innerHTML = 
                             "Latitude: " + position.coords.latitude 
                             + "<br>Longitude: " + position.coords.longitude
@@ -19,11 +30,24 @@
                             + "<br>speed" + position.coords.speed
                         }
                     )
+                } else {
+                    x.innerHTML = "data not found"
                 }
-            }
-            function clearData() {
-                x.innerHTML = ""
-            }
+            }, 200)
+
+            setInterval(() => {
+                if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            if(
+                                Math.abs(position.coords.longitude - targetX) < 0.0005
+                                && Math.abs(position.coords.latitude - targetY) < 0.0005
+                            ) y.innerHTML = "in class"
+                            else y.innerHTML = "not in class"
+                        }
+                    )
+                }
+            }, 200)
         </script>
     </body>
 </html>
