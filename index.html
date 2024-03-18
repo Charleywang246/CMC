@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <button type="button" onclick="getLocation()">getLocation</button>
+        <button type="button" onclick="clearData()">clear</button>
+        <p id="demo"></p>
+        <script>
+            const x = document.getElementById("demo")
+            function getLocation() {
+                if(navigator.geolocation) {
+                    navigator.geolocation.watchPosition(
+                        (position) => {x.innerHTML = 
+                            "Latitude: " + position.coords.latitude 
+                            + "<br>Longitude: " + position.coords.longitude
+                            + "<br>Accuracy: " + position.coords.accuracy
+                            + "<br>Altitude: " + position.coords.altitude
+                            + "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy
+                            + "<br>Heading: " + position.coords.heading
+                            + "<br>speed" + position.coords.speed
+                        }
+                    )
+                }
+            }
+            function clearData() {
+                x.innerHTML = ""
+            }
+        </script>
+    </body>
+</html>
