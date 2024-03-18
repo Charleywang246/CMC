@@ -8,9 +8,13 @@
     <body>
         <p id="demo"></p>
         <p id="output"></p>
+        <input type="text" name="targetX" id="tx">
+        <input type="text" name="targetY" id="ty">
+        <button type="button" onclick="setTarget()">update</button>
+        <button type="button" onclick="print()">print</button>
         <script>
-            const targetX = 120.6362484
-            const targetY = 24.1068502
+            let targetX = 120.6362484
+            let targetY = 24.1068502
             // const targetX = 120.6370795
             // const targetY = 24.1046469
 
@@ -21,8 +25,8 @@
                 if(navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
                         (position) => {x.innerHTML = 
-                            "Latitude: " + position.coords.latitude 
-                            + "<br>Longitude: " + position.coords.longitude
+                            "Longitude: " + position.coords.longitude
+                            + "<br>Latitude: " + position.coords.latitude 
                             + "<br>Accuracy: " + position.coords.accuracy
                             + "<br>Altitude: " + position.coords.altitude
                             + "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy
@@ -30,8 +34,6 @@
                             + "<br>speed" + position.coords.speed
                         }
                     )
-                } else {
-                    x.innerHTML = "data not found"
                 }
             }, 200)
 
@@ -48,6 +50,19 @@
                     )
                 }
             }, 200)
+
+            function setTarget() {
+                k1 = document.getElementById('tx').value
+                k2 = document.getElementById('ty').value
+                if(isFinite(k1) || isFinite(k2)) {
+                    targetX = k1 != "" ? k1 : targetX
+                    targetY = k2 != "" ? k2 : targetY
+                }
+            }
+            function print() {
+                console.log("targetX: " + targetX)
+                console.log("targetY: " + targetY)
+            }
         </script>
     </body>
 </html>
