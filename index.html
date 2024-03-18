@@ -6,12 +6,20 @@
         <title>Document</title>
     </head>
     <body>
+        <button type="button" onclick="gl()">get Location</button>
         <p id="demo"></p>
         <p id="output"></p>
         <input type="text" name="targetX" id="tx">
         <input type="text" name="targetY" id="ty">
         <button type="button" onclick="setTarget()">update</button>
         <button type="button" onclick="print()">print</button>
+
+        <p>=====</p>
+
+        <button type="button" id="gb" onclick="gb()">request bluetooth</button>
+        <br><input type="text" name="bn" id="bn"><button type="button" onclick="sbn()">Set Name</button>
+        <p>current bluetooth name: <span id="cbn"></span></p>
+
         <script>
             let targetX = 120.6362484
             let targetY = 24.1068502
@@ -21,7 +29,7 @@
             const x = document.getElementById("demo")
             const y = document.getElementById("output")
 
-            setInterval(() => {
+            function gl() {
                 if(navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
                         (position) => {
@@ -37,7 +45,7 @@
                         }
                     )
                 }
-            }, 1000)
+            }
 
             function setTarget() {
                 k1 = document.getElementById('tx').value
@@ -53,6 +61,25 @@
                 console.log("targetY: " + targetY)
             }
 
+            let blueToothName = "LAPTOP-7D3JABTQ"
+
+            function gb() {
+                navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true
+                })
+                .then(device => {
+                    console.log(device.name)
+                })
+                .catch(error => {console.log(error)})
+            }
+
+            function sbn() {
+                if(document.getElementById("bn").value != "") {
+                    blueToothName = document.getElementById("bn").value
+                }
+                document.getElementById("cbn").innerHTML = blueToothName
+            }
+                
         </script>
     </body>
 </html>
