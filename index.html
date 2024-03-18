@@ -16,9 +16,12 @@
 
         <p>=====</p>
 
-        <button type="button" id="gb" onclick="gb()">request bluetooth</button>
+        <!-- <button type="button" id="gb" onclick="gb()">request bluetooth</button>
         <br><input type="text" name="bn" id="bn"><button type="button" onclick="sbn()">Set Name</button>
-        <p>current bluetooth name: <span id="cbn"></span></p>
+        <p>current bluetooth name: <span id="cbn"></span></p> -->
+
+        <p>=====</p>
+        
 
         <script>
             let targetX = 120.6362484
@@ -61,24 +64,24 @@
                 console.log("targetY: " + targetY)
             }
 
-            let blueToothName = "LAPTOP-7D3JABTQ"
+            // let blueToothName = "LAPTOP-7D3JABTQ"
 
-            function gb() {
-                navigator.bluetooth.requestDevice({
-                    acceptAllDevices: true
-                })
-                .then(device => {
-                    console.log(device.name)
-                })
-                .catch(error => {console.log(error)})
-            }
+            // function gb() {
+            //     navigator.bluetooth.requestDevice({
+            //         acceptAllDevices: true
+            //     })
+            //     .then(device => {
+            //         console.log(device.name)
+            //     })
+            //     .catch(error => {console.log(error)})
+            // }
 
-            function sbn() {
-                if(document.getElementById("bn").value != "") {
-                    blueToothName = document.getElementById("bn").value
-                }
-                document.getElementById("cbn").innerHTML = blueToothName
-            }
+            // function sbn() {
+            //     if(document.getElementById("bn").value != "") {
+            //         blueToothName = document.getElementById("bn").value
+            //     }
+            //     document.getElementById("cbn").innerHTML = blueToothName
+            // }
                 
         </script>
     </body>
