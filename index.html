@@ -24,23 +24,11 @@
             setInterval(() => {
                 if(navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
-                        (position) => {x.innerHTML = 
+                        (position) => {
+                            x.innerHTML = 
                             "Longitude: " + position.coords.longitude
                             + "<br>Latitude: " + position.coords.latitude 
                             + "<br>Accuracy: " + position.coords.accuracy
-                            + "<br>Altitude: " + position.coords.altitude
-                            + "<br>Altitude Accuracy: " + position.coords.altitudeAccuracy
-                            + "<br>Heading: " + position.coords.heading
-                            + "<br>speed" + position.coords.speed
-                        }
-                    )
-                }
-            }, 200)
-
-            setInterval(() => {
-                if(navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        (position) => {
                             if(
                                 Math.abs(position.coords.longitude - targetX) < 0.0005
                                 && Math.abs(position.coords.latitude - targetY) < 0.0005
@@ -49,7 +37,7 @@
                         }
                     )
                 }
-            }, 200)
+            }, 1000)
 
             function setTarget() {
                 k1 = document.getElementById('tx').value
@@ -59,10 +47,12 @@
                     targetY = k2 != "" ? k2 : targetY
                 }
             }
+
             function print() {
                 console.log("targetX: " + targetX)
                 console.log("targetY: " + targetY)
             }
+
         </script>
     </body>
 </html>
