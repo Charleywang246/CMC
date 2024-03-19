@@ -13,6 +13,7 @@
         <input type="text" name="targetY" id="ty">
         <button type="button" onclick="setTarget()">update</button>
         <button type="button" onclick="print()">print</button>
+        <p id="t"></p>
 
         <p>=====</p>
 
@@ -24,30 +25,36 @@
         
 
         <script>
-            let targetX = 120.6362484
-            let targetY = 24.1068502
+            let targetX = 120.6362440
+            let targetY = 24.1065927
             // const targetX = 120.6370795
             // const targetY = 24.1046469
 
             const x = document.getElementById("demo")
             const y = document.getElementById("output")
 
+            let t = 0;
+
             function gl() {
-                if(navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        (position) => {
-                            x.innerHTML = 
-                            "Longitude: " + position.coords.longitude
-                            + "<br>Latitude: " + position.coords.latitude 
-                            + "<br>Accuracy: " + position.coords.accuracy
-                            if(
-                                Math.abs(position.coords.longitude - targetX) < 0.0005
-                                && Math.abs(position.coords.latitude - targetY) < 0.0005
-                            ) y.innerHTML = "in class"
-                            else y.innerHTML = "not in class"
-                        }
-                    )
-                }
+                setInterval(()=>{
+                    if(navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                                x.innerHTML = 
+                                "Longitude: " + position.coords.longitude
+                                + "<br>Latitude: " + position.coords.latitude 
+                                + "<br>Accuracy: " + position.coords.accuracy
+                                if(
+                                    Math.abs(position.coords.longitude - targetX) < 0.0002
+                                    && Math.abs(position.coords.latitude - targetY) < 0.0002
+                                ) y.innerHTML = "in class"
+                                else y.innerHTML = "not in class"
+                            }
+                        )
+                    }
+                    t += 1
+                    document.getElementById('t').innerHTML = t
+                },500)
             }
 
             function setTarget() {
