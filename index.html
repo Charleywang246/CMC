@@ -21,7 +21,7 @@
         <p>current bluetooth name: <span id="cbn"></span></p> -->
 
         <p>=====</p>
-        <p>ahah</p>    
+        <p id="_">ahah</p>    
 
         <script>
             let targetX = 120.6362440
@@ -34,23 +34,22 @@
 
             let t = 0;
 
-            function gl() {
-                navigator.geolocation.watchPosition(
+            setInterval(()=>{
+                navigator.geolocation.getCurrentPosition(
                     (position) => {
-                            x.innerText = 
-                            "Longitude: " + position.coords.longitude
-                            + "<br>Latitude: " + position.coords.latitude
-                            if(
-                                Math.abs(position.coords.longitude - targetX) < 0.00006
-                                && Math.abs(position.coords.latitude - targetY) < 0.00006
-                            ) y.innerText = "in class"
-                            else y.innerText = "not in class"
-                        }
-                    , () => {
-                        x.innerText = "error"
+                        x.innerText = 
+                        "Longitude: " + position.coords.longitude
+                        + "<br>Latitude: " + position.coords.latitude
+                        if(
+                            Math.abs(position.coords.longitude - targetX) < 0.00006
+                            && Math.abs(position.coords.latitude - targetY) < 0.00006
+                        ) y.innerText = "in class"
+                        else y.innerText = "not in class"
+                        t++
+                        document.getElementById('_').innerText = t
                     }
                 )
-            }
+            }, 200)
 
             function setTarget() {
                 k1 = document.getElementById('tx').value
